@@ -11,6 +11,10 @@ class MtWeatherInfoModel extends FlutterFlowModel<MtWeatherInfoWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -18,9 +22,11 @@ class MtWeatherInfoModel extends FlutterFlowModel<MtWeatherInfoWidget> {
 
   void dispose() {
     unfocusNode.dispose();
+    textFieldFocusNode?.dispose();
+    textController?.dispose();
   }
 
-  /// Action blocks are added here.
+/// Action blocks are added here.
 
-  /// Additional helper methods are added here.
+/// Additional helper methods are added here.
 }
