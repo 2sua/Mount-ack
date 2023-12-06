@@ -57,7 +57,7 @@ class _HikingTrailInfoWidgetState extends State<HikingTrailInfoWidget> {
           title: Text(
             '등산 경로',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Urbanist',
+                  fontFamily: 'Roboto',
                   color: Colors.white,
                   fontSize: 22.0,
                 ),
