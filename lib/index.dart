@@ -12,3 +12,6 @@ export '/pages/main/first_aid_info_page/first_aid_info_page_widget.dart'
     show FirstAidInfoPageWidget;
 export '/pages/main/seasonal_hiking_page/seasonal_hiking_page_widget.dart'
     show SeasonalHikingPageWidget;
+export '/pages/hiking_trail_info/hiking_trail_detail_page/hiking_trail_detail_page_widget.dart'
+    show HikingTrailDetailPageWidget;
+
