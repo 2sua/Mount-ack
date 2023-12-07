@@ -61,7 +61,7 @@ class _MtWeatherInfoWidgetState extends State<MtWeatherInfoWidget> {
           title: Text(
             '산악 기상 정보',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-              fontFamily: 'Roboto',
+              fontFamily: 'Urbanist',
               color: Colors.white,
               fontSize: 22,
             ),
@@ -99,6 +99,7 @@ class _MtWeatherInfoWidgetState extends State<MtWeatherInfoWidget> {
                         child: TextFormField(
                           controller: _model.textController,
                           focusNode: _model.textFieldFocusNode,
+                          autofocus: false,
                           obscureText: false,
                           decoration: InputDecoration(
                             labelStyle:
@@ -298,7 +299,7 @@ class _MtWeatherInfoWidgetState extends State<MtWeatherInfoWidget> {
                                       fontFamily: 'Open Sans Condensed',
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
-                                      fontSize: 34,
+                                      fontSize: 30,
                                     ),
                                   ),
                                 ),
@@ -368,7 +369,7 @@ class _MtWeatherInfoWidgetState extends State<MtWeatherInfoWidget> {
                                       fontFamily: 'Open Sans Condensed',
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
-                                      fontSize: 34,
+                                      fontSize: 30,
                                     ),
                                   ),
                                 ),
@@ -438,7 +439,7 @@ class _MtWeatherInfoWidgetState extends State<MtWeatherInfoWidget> {
                                       fontFamily: 'Open Sans Condensed',
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
-                                      fontSize: 34,
+                                      fontSize: 30,
                                     ),
                                   ),
                                 ),
@@ -518,7 +519,7 @@ class _MtWeatherInfoWidgetState extends State<MtWeatherInfoWidget> {
                                       fontFamily: 'Open Sans Condensed',
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
-                                      fontSize: 24,
+                                      fontSize: 22,
                                     ),
                                   ),
                                 ),
@@ -606,7 +607,7 @@ class _MtWeatherInfoWidgetState extends State<MtWeatherInfoWidget> {
                                       fontFamily: 'Open Sans Condensed',
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
-                                      fontSize: 34,
+                                      fontSize: 30,
                                     ),
                                   ),
                                 ),
@@ -676,7 +677,7 @@ class _MtWeatherInfoWidgetState extends State<MtWeatherInfoWidget> {
                                       fontFamily: 'Open Sans Condensed',
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
-                                      fontSize: 34,
+                                      fontSize: 30,
                                     ),
                                   ),
                                 ),
