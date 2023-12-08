@@ -92,6 +92,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'seasonal_hiking_page',
           path: '/seasonalHikingPage',
           builder: (context, params) => SeasonalHikingPageWidget(),
+        ),
+        FFRoute(
+            name: 'hiking_trail_detail_page',
+            path: '/hikingTrailDetailPage',
+            builder: (context, params) => HikingTrailDetailPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],
