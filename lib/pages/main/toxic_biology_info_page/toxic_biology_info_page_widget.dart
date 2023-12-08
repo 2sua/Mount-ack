@@ -630,6 +630,7 @@ class _ToxicBiologyInfoPageWidgetState extends State<ToxicBiologyInfoPageWidget>
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Plus Jakarta Sans',
+                                            color: FlutterFlowTheme.of(context).error,
                                             fontSize: 12.0,
                                           ),
                                     ),
