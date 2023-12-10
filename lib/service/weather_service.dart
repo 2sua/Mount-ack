@@ -1,6 +1,5 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:mount_ack/data/NetworkHelper.dart';
+import 'package:mount_ack/data/network_helper.dart';
 import 'package:mount_ack/data/my_location.dart';
 import 'dart:developer' as developer;
 

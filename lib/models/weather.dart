@@ -4,11 +4,14 @@ class Weather {
   double? tempMin;
   double? feelsLike;
   String? mainWeather;
+  int? mainWeatherId;
   String? icon;
   int? sunrise;
   int? sunset;
   int? humidity;
   int? visibility;
+  String? country;
+  String? city;
 
   Weather({
     this.temp,
