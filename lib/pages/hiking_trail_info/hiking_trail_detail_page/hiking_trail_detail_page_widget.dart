@@ -11,6 +11,10 @@ import 'package:provider/provider.dart';
 import 'hiking_trail_detail_page_model.dart';
 export 'hiking_trail_detail_page_model.dart';
 
+import 'package:kakaomap_webview/kakaomap_webview.dart';
+
+String kakaoMapKey = "02a729c5635424a6e12a61281606eda1";
+
 class HikingTrailDetailPageWidget extends StatefulWidget {
   const HikingTrailDetailPageWidget({Key? key}) : super(key: key);
 
@@ -175,10 +179,22 @@ class _HikingTrailDetailPageWidgetState
                           ),
                         ),
                         // *** 카카오맵 뷰 들어갈 곳
-                        expanded: Text(
-                          '지도 넣으시요...',
-                          style: FlutterFlowTheme.of(context).bodyMedium,
+                        expanded: KakaoMapView(
+                          width: 350,
+                          height: 450,
+                          kakaoMapKey: kakaoMapKey,
+                          // lat: double.parse(facilityDetailList[0].la  ?? '0.0'),
+                          // lng: double.parse(facilityDetailList[0].lo ?? '0.0'),
+                          lat: 37.5665,
+                          lng: 126.9780,
+                          showMapTypeControl: true,
+                          showZoomControl: true,
+                          markerImageURL: 'https://img.icons8.com/glyph-neue/64/176ffe/region-code.png',
                         ),
+                        // expanded: Text(
+                        //   '지도 넣으시요...',
+                        //   style: FlutterFlowTheme.of(context).bodyMedium,
+                        // ),
                         theme: ExpandableThemeData(
                           tapHeaderToExpand: true,
                           tapBodyToExpand: false,
