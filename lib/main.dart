@@ -4,21 +4,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
+import 'package:mount_ack/providers/weather_provider.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
+import 'package:mount_ack/network/network_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
 
-  await dotenv.load(fileName: 'assets/config/.env');
+  await dotenv.load(fileName: '.env');
   await FlutterFlowTheme.initialize();
+  NetworkHelper();
 
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (BuildContext context) => WeatherProvider(),
+    child: MyApp()
+  ));
 }
 
 class MyApp extends StatefulWidget {

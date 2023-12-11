@@ -1,15 +1,15 @@
 class Weather {
-  double? temp;
-  double? tempMax;
-  double? tempMin;
-  double? feelsLike;
+  int? temp;
+  int? tempMax;
+  int? tempMin;
+  int? feelsLike;
   String? mainWeather;
   int? mainWeatherId;
   String? icon;
-  int? sunrise;
-  int? sunset;
+  DateTime? sunrise;
+  DateTime? sunset;
   int? humidity;
-  int? visibility;
+  double? visibility;
   String? country;
   String? city;
 
@@ -19,10 +19,13 @@ class Weather {
     this.tempMin,
     this.feelsLike,
     this.mainWeather,
+    this.mainWeatherId,
     this.icon,
     this.sunrise,
     this.sunset,
     this.humidity,
     this.visibility,
+    this.country,
+    this.city,
   });
 }
