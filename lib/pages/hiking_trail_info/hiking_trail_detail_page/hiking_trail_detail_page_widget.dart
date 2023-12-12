@@ -10,6 +10,10 @@ import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'hiking_trail_detail_page_model.dart';
 export 'hiking_trail_detail_page_model.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:kakaomap_webview/kakaomap_webview.dart';
+
+String kakaoMapKey = dotenv.env['KAKAO_MAP_KEY']!;
 
 import 'package:kakaomap_webview/kakaomap_webview.dart';
 
@@ -192,7 +196,6 @@ class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidge
                             showZoomControl: true,
                             markerImageURL: 'https://img.icons8.com/glyph-neue/64/176ffe/region-code.png',
                           ),
-                        ),
                         // expanded: Text(
                         //   '지도 넣으시요...',
                         //   style: FlutterFlowTheme.of(context).bodyMedium,

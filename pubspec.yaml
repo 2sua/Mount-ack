@@ -27,6 +27,7 @@ dependencies:
   kakao_map_plugin:
   flutter_localizations:
     sdk: flutter
+  flutter_dotenv: ^5.0.2
   auto_size_text: 3.0.0
   cached_network_image: 3.2.1
   carousel_slider: 4.2.1
