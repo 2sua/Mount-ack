@@ -10,7 +10,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'hiking_trail_detail_page_model.dart';
 export 'hiking_trail_detail_page_model.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:kakaomap_webview/kakaomap_webview.dart';
 
 class HikingTrailDetailPageWidget extends StatefulWidget {
