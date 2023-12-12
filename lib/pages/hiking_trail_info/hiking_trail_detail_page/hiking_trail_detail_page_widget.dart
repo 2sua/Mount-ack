@@ -11,6 +11,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'hiking_trail_detail_page_model.dart';
 export 'hiking_trail_detail_page_model.dart';
 import 'package:kakaomap_webview/kakaomap_webview.dart';
+import 'package:mount_ack/service/route_service.dart';
 
 class HikingTrailDetailPageWidget extends StatefulWidget {
   const HikingTrailDetailPageWidget({Key? key}) : super(key: key);
@@ -25,6 +26,8 @@ class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidge
 
   final String _kakaoMapKey = dotenv.env['kakaoMapKey'].toString();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final GetRoutService _getRoutService = GetRoutService();
+
 
   @override
   void initState() {
@@ -78,28 +81,43 @@ class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidge
               context.pop();
             },
           ),
-          title: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 10),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Column(
+          title: FutureBuilder(
+            future: _getRoutService.getRoute(),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData == false)
+                return CircularProgressIndicator();
+              return Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 10),
+                child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(
-                      '개금산',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Roboto',
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '개금산',
+                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Roboto',
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          '전평제길-순환좌1길구간',
+                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Roboto',
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ],
                     ),
                     Text(
-                      '전평제길-순환좌1길구간',
+                      '난이도: 쉬움',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Roboto',
                         color: Colors.white,
@@ -108,16 +126,8 @@ class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidge
                     ),
                   ],
                 ),
-                Text(
-                  '난이도: 쉬움',
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    fontFamily: 'Roboto',
-                    color: Colors.white,
-                    fontSize: 13,
-                  ),
-                ),
-              ],
-            ),
+              );
+            },
           ),
           actions: [],
           centerTitle: false,
