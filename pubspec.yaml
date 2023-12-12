@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  kakaomap_webview: ^0.6.2
+  kakao_map_plugin:
   flutter_localizations:
     sdk: flutter
   flutter_dotenv: ^5.0.2
@@ -61,8 +63,7 @@ dependencies:
   video_player_platform_interface: 6.1.0
   video_player_web: 2.0.15
   expandable: 5.0.1
-  kakaomap_webview: ^0.3.0
-#  flutter_kakao_map: ^0.0.4
+  flutter_dotenv: ^5.0.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -91,6 +92,7 @@ flutter:
     - assets/fonts/
     - assets/images/
     - assets/videos/
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
