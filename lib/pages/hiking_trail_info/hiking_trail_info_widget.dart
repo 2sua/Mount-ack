@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:mount_ack/service/route_service.dart';
+import 'package:mount_ack/models/route.dart';
 
 import 'hiking_trail_info_model.dart';
 export 'hiking_trail_info_model.dart';
@@ -21,6 +23,7 @@ class _HikingTrailInfoWidgetState extends State<HikingTrailInfoWidget> {
   late HikingTrailInfoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final GetRoutService _getRoutService = GetRoutService();
 
   @override
   void initState() {
@@ -131,304 +134,312 @@ class _HikingTrailInfoWidgetState extends State<HikingTrailInfoWidget> {
                   ),
                 ),
                 // *** 추천 등산로 바텀 부분은 이 컬럼을 사용
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(25, 10, 0, 10),
-                      child: Row(
+                FutureBuilder<List<dynamic>>(
+                    future: _getRoutService.getRoute(),
+                    builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+                      if (snapshot.hasData == false)
+                        return CircularProgressIndicator();
+                      return Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Icon(
-                            Icons.insights_rounded,
-                            color: Color(0xFF777777),
-                            size: 18,
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
-                            child: Text(
-                              '금주의 추천 등산로',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                fontFamily: 'Roboto',
-                                color: Color(0xFF777777),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    ListView(
-                      padding: EdgeInsets.zero,
-                      primary: false,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 8),
-                          child: Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 4,
-                                  color: Color(0x33000000),
-                                  offset: Offset(0, 2),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  20, 15, 15, 18),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '개금산',
-                                          style: FlutterFlowTheme.of(context)
-                                              .headlineSmall
-                                              .override(
-                                            fontFamily: 'Roboto',
-                                            color:
-                                            FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0, 4, 8, 0),
-                                          child: AutoSizeText(
-                                            '전평제길-순환좌1길구간',
-                                            textAlign: TextAlign.start,
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelMedium
-                                                .override(
-                                              fontFamily: 'Roboto',
-                                              color: Color(0xFF777777),
-                                              fontSize: 13,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(25, 10, 0, 10),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Icon(
+                                      Icons.insights_rounded,
+                                      color: Color(0xFF777777),
+                                      size: 18,
                                     ),
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 4, 0, 0),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                                'hiking_trail_detail_page');
-                                          },
-                                          child: Icon(
-                                            Icons.chevron_right_rounded,
-                                            color: Color(0xFF777777),
-                                            size: 24,
-                                          ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
+                                      child: Text(
+                                        '금주의 추천 등산로',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                          fontFamily: 'Roboto',
+                                          color: Color(0xFF777777),
                                         ),
                                       ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 8, 9, 0),
-                                        child: Text(
-                                          '난이도: 쉬움',
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                            fontFamily: 'Roboto',
-                                            color: Color(0xFF777777),
-                                            fontSize: 13,
-                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              ListView(
+                                padding: EdgeInsets.zero,
+                                primary: false,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                children: [
+                                  ...(snapshot.data?.map((e) => Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 8),
+                                    child: Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color:
+                                        FlutterFlowTheme.of(context).secondaryBackground,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 4,
+                                            color: Color(0x33000000),
+                                            offset: Offset(0, 2),
+                                          )
+                                        ],
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: Padding(
+                                        padding:
+                                        EdgeInsetsDirectional.fromSTEB(20, 15, 15, 18),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    e.mntnNm.toString(),
+                                                    style: FlutterFlowTheme.of(context)
+                                                        .headlineSmall
+                                                        .override(
+                                                      fontFamily: 'Roboto',
+                                                      color: FlutterFlowTheme.of(context)
+                                                          .primaryText,
+                                                      fontSize: 22,
+                                                      fontWeight: FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                    EdgeInsetsDirectional.fromSTEB(0, 4, 8, 0),
+                                                    child: AutoSizeText(
+                                                      e.pmntnNm.toString(),
+                                                      textAlign: TextAlign.start,
+                                                      style: FlutterFlowTheme.of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                        fontFamily: 'Roboto',
+                                                        color: Color(0xFF777777),
+                                                        fontSize: 13,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                                                  child: InkWell(
+                                                    splashColor: Colors.transparent,
+                                                    focusColor: Colors.transparent,
+                                                    hoverColor: Colors.transparent,
+                                                    highlightColor: Colors.transparent,
+                                                    onTap: () async {
+                                                      context.pushNamed(
+                                                          'hiking_trail_detail_page');
+                                                    },
+                                                    child: Icon(
+                                                      Icons.chevron_right_rounded,
+                                                      color: Color(0xFF777777),
+                                                      size: 24,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional.fromSTEB(0, 8, 9, 0),
+                                                  child: Text(
+                                                    '난이도: ${e.pmntnDffl.toString()}',
+                                                    textAlign: TextAlign.center,
+                                                    style: FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                      fontFamily: 'Roboto',
+                                                      color: Color(0xFF777777),
+                                                      fontSize: 13,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                    ],
+                                    ),
+                                  )).toList() ?? []),
+                                ],
+                              ),
+                            ],
+                          ),
+                          // *** 등산로 검색 결과 바텀 부분은 이 컬럼을 사용
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(25, 10, 0, 10),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Icon(
+                                      Icons.place_rounded,
+                                      color: Color(0xFF777777),
+                                      size: 18,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
+                                      child: Text(
+                                        '검색결과 총 3개',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                          fontFamily: 'Roboto',
+                                          color: Color(0xFF777777),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              ListView(
+                                padding: EdgeInsets.zero,
+                                primary: false,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 8),
+                                    child: Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 4,
+                                            color: Color(0x33000000),
+                                            offset: Offset(0, 2),
+                                          )
+                                        ],
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            20, 15, 15, 18),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    '개금산',
+                                                    style: FlutterFlowTheme.of(context)
+                                                        .headlineSmall
+                                                        .override(
+                                                      fontFamily: 'Roboto',
+                                                      color:
+                                                      FlutterFlowTheme.of(context)
+                                                          .primaryText,
+                                                      fontSize: 22,
+                                                      fontWeight: FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                    EdgeInsetsDirectional.fromSTEB(
+                                                        0, 4, 8, 0),
+                                                    child: AutoSizeText(
+                                                      '전평제길-순환좌1길구간',
+                                                      textAlign: TextAlign.start,
+                                                      style: FlutterFlowTheme.of(context)
+                                                          .labelMedium
+                                                          .override(
+                                                        fontFamily: 'Roboto',
+                                                        color: Color(0xFF777777),
+                                                        fontSize: 13,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                                      0, 4, 0, 0),
+                                                  child: InkWell(
+                                                    splashColor: Colors.transparent,
+                                                    focusColor: Colors.transparent,
+                                                    hoverColor: Colors.transparent,
+                                                    highlightColor: Colors.transparent,
+                                                    onTap: () async {
+                                                      context.pushNamed(
+                                                          'hiking_trail_detail_page');
+                                                    },
+                                                    child: Icon(
+                                                      Icons.chevron_right_rounded,
+                                                      color: Color(0xFF777777),
+                                                      size: 24,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                                      0, 8, 9, 0),
+                                                  child: Text(
+                                                    '난이도: 쉬움',
+                                                    textAlign: TextAlign.center,
+                                                    style: FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                      fontFamily: 'Roboto',
+                                                      color: Color(0xFF777777),
+                                                      fontSize: 13,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                // *** 등산로 검색 결과 바텀 부분은 이 컬럼을 사용
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(25, 10, 0, 10),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Icon(
-                            Icons.place_rounded,
-                            color: Color(0xFF777777),
-                            size: 18,
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
-                            child: Text(
-                              '검색결과 총 3개',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                fontFamily: 'Roboto',
-                                color: Color(0xFF777777),
-                              ),
-                            ),
+                            ],
                           ),
                         ],
-                      ),
-                    ),
-                    ListView(
-                      padding: EdgeInsets.zero,
-                      primary: false,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 8),
-                          child: Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 4,
-                                  color: Color(0x33000000),
-                                  offset: Offset(0, 2),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  20, 15, 15, 18),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '개금산',
-                                          style: FlutterFlowTheme.of(context)
-                                              .headlineSmall
-                                              .override(
-                                            fontFamily: 'Roboto',
-                                            color:
-                                            FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0, 4, 8, 0),
-                                          child: AutoSizeText(
-                                            '전평제길-순환좌1길구간',
-                                            textAlign: TextAlign.start,
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelMedium
-                                                .override(
-                                              fontFamily: 'Roboto',
-                                              color: Color(0xFF777777),
-                                              fontSize: 13,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 4, 0, 0),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                                'hiking_trail_detail_page');
-                                          },
-                                          child: Icon(
-                                            Icons.chevron_right_rounded,
-                                            color: Color(0xFF777777),
-                                            size: 24,
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 8, 9, 0),
-                                        child: Text(
-                                          '난이도: 쉬움',
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                            fontFamily: 'Roboto',
-                                            color: Color(0xFF777777),
-                                            fontSize: 13,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                      );
+                    }
                 ),
               ],
             ),

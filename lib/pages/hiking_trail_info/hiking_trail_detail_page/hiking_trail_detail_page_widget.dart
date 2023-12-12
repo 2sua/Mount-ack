@@ -13,6 +13,8 @@ export 'hiking_trail_detail_page_model.dart';
 import 'package:kakaomap_webview/kakaomap_webview.dart';
 import 'package:mount_ack/service/route_service.dart';
 
+const String kakaoMapKey = '71e91254a407783fddea802ea4946620';
+
 class HikingTrailDetailPageWidget extends StatefulWidget {
   const HikingTrailDetailPageWidget({Key? key}) : super(key: key);
 
@@ -24,7 +26,6 @@ class HikingTrailDetailPageWidget extends StatefulWidget {
 class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidget> {
   late HikingTrailDetailPageModel _model;
 
-  final String _kakaoMapKey = dotenv.env['kakaoMapKey'].toString();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final GetRoutService _getRoutService = GetRoutService();
 
@@ -84,8 +85,8 @@ class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidge
           title: FutureBuilder(
             future: _getRoutService.getRoute(),
             builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData == false)
-                return CircularProgressIndicator();
+              // if (snapshot.hasData == false)
+              //   return CircularProgressIndicator();
               return Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 10),
                 child: Row(
@@ -190,9 +191,7 @@ class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidge
                           child: KakaoMapView(
                             width: 350,
                             height: 450,
-                            kakaoMapKey: _kakaoMapKey,
-                            // lat: double.parse(facilityDetailList[0].la  ?? '0.0'),
-                            // lng: double.parse(facilityDetailList[0].lo ?? '0.0'),
+                            kakaoMapKey: kakaoMapKey,
                             lat: 37.5665,
                             lng: 126.9780,
                             showMapTypeControl: true,
