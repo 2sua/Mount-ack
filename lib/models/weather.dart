@@ -6,8 +6,8 @@ class Weather {
   String? mainWeather;
   int? mainWeatherId;
   String? icon;
-  DateTime? sunrise;
-  DateTime? sunset;
+  String? sunrise;
+  String? sunset;
   int? humidity;
   double? visibility;
   String? country;

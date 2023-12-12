@@ -12,21 +12,21 @@ class OpenWeatherService {
 
   Future getWeather() async {
     MyLocation myLocation = MyLocation();
+
+    try {
+      await myLocation.getMyCurrentLocation();
+    } catch (e) {
+      developer.log("에러!!!!!: getLocation ${e.toString()}");
+    }
+
     Weather weather = Weather();
     http.Response response;
     String apiAddr = '$_baseUrl?lat=${myLocation.latitude}&lon=${myLocation.longitude}&appid=$_apiKey&units=metric';
     DateFormat formatter = DateFormat('HH:mm');
 
     try {
-      await myLocation.getMyCurrentLocation();
-    } catch (e) {
-      developer.log("error: getLocation ${e.toString()}");
-    }
-
-    try {
       response = await http.get(Uri.parse(apiAddr));
       final weatherData = json.decode(response.body);
-      print("하...: ${weatherData["sys"]["sunrise"] * 1000}");
       weather = Weather(
           temp: (weatherData['main']['temp'] * 10).round() ~/ 10,
           tempMax: (weatherData['main']['temp_max'] * 10).round() ~/ 10,
@@ -35,8 +35,8 @@ class OpenWeatherService {
           mainWeather: weatherData["weather"][0]["main"],
           mainWeatherId: weatherData["weather"][0]["id"],
           icon: weatherData["weather"][0]["icon"],
-          // sunrise: DateTime.fromMillisecondsSinceEpoch(weatherData["sys"]["sunrise"] * 1000),
-          // sunset: DateTime.fromMillisecondsSinceEpoch(weatherData["sys"]["sunset"] * 1000),
+          sunrise: formatter.format(DateTime.fromMillisecondsSinceEpoch(weatherData["sys"]["sunrise"] * 1000)),
+          sunset: formatter.format(DateTime.fromMillisecondsSinceEpoch(weatherData["sys"]["sunset"] * 1000)),
           humidity: weatherData['main']['humidity'],
           visibility: weatherData['visibility'] / 1000,
           country: weatherData['sys']['country'],

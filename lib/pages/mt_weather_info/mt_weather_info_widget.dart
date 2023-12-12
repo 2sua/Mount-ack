@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:mount_ack/models/weather.dart';
 import 'package:mount_ack/service/weather_service.dart';
 import 'package:mount_ack/providers/weather_provider.dart';
-import 'package:mount_ack/models/weather.dart';
 
 import 'mt_weather_info_model.dart';
 export 'mt_weather_info_model.dart';
