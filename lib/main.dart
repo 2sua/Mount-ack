@@ -10,11 +10,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 
 Future<void> main() async {
-  await dotenv.load(fileName: ".env");
-
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
 
