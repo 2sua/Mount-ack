@@ -14,7 +14,7 @@ import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
 import 'package:mount_ack/network/network_helper.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
 
