@@ -63,7 +63,6 @@ dependencies:
   video_player_platform_interface: 6.1.0
   video_player_web: 2.0.15
   expandable: 5.0.1
-  flutter_dotenv: ^5.0.2
   geolocator: ^7.0.0
   permission_handler: ^8.3.0
   flutter_riverpod: ^2.3.4
