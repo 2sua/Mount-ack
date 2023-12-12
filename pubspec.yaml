@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  kakaomap_webview: ^0.6.2
+  kakao_map_plugin:
   flutter_localizations:
     sdk: flutter
   flutter_dotenv: ^5.0.2
