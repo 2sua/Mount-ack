@@ -63,7 +63,7 @@ class _MtWeatherInfoWidgetState extends State<MtWeatherInfoWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
           title: Text(
-            Provider.of<WeatherProvider>(context).weather.city.toString(),
+            '산악 기상 정보',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
               fontFamily: 'Urbanist',
               color: Colors.white,

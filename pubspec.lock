@@ -153,6 +153,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  fijkplayer:
+    dependency: "direct main"
+    description:
+      name: fijkplayer
+      sha256: "32e7c827c24f626e8d0a662212363d5a6387d89ec6138aca7d754ba87b09668f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.10.1"
   file:
     dependency: transitive
     description:
@@ -365,13 +373,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.2"
-  kakaomap_webview:
-    dependency: "direct main"
-    description:
-      name: kakaomap_webview
-      sha256: bb23f6fcb9a23fee46373b9f55a9c660a0e163e96d2ecf5dea443366e7ac7215
-      url: "https://pub.dev"
-    source: hosted
   lints:
     dependency: "direct dev"
     description:
