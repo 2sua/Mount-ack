@@ -165,7 +165,7 @@ class _MainWidgetState extends State<MainWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 10.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 10.0),
                 child: Text(
                   '위급 상황 시 행동 요령 (3C)',
                   textAlign: TextAlign.start,
@@ -178,7 +178,7 @@ class _MainWidgetState extends State<MainWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 10.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 20.0),
                 child: Container(
                   width: double.infinity,
                   height: 200.0,
