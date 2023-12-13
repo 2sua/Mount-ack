@@ -15,13 +15,16 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
 import 'package:mount_ack/network/network_helper.dart';
+import 'package:kakao_map_plugin/kakao_map_plugin.dart';
 
 Future<void> main() async {
+  await dotenv.load(fileName: '.env');
+  AuthRepository.initialize(appKey: dotenv.env['kakaoMapKey'] ?? '740970e6976f62601e189ae6bc551136');
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
 
-  await dotenv.load(fileName: '.env');
-  await FlutterFlowTheme.initialize();
+
+  // await FlutterFlowTheme.initialize();
   NetworkHelper();
 
 //   runApp(MaterialApp(
