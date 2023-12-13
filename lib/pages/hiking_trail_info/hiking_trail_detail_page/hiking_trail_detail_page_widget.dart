@@ -10,8 +10,11 @@ import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'hiking_trail_detail_page_model.dart';
 export 'hiking_trail_detail_page_model.dart';
-import 'package:kakaomap_webview/kakaomap_webview.dart';
+// import 'package:kakaomap_webview/kakaomap_webview.dart';
 import 'package:mount_ack/service/route_service.dart';
+// import 'package:example/kakaomap_screen.dart';
+import 'package:kakao_map_plugin/kakao_map_plugin.dart' as kakaomap;
+// import 'package:mount_ack/service/parse_route.dart';
 
 class HikingTrailDetailPageWidget extends StatefulWidget {
   const HikingTrailDetailPageWidget({Key? key}) : super(key: key);
@@ -23,11 +26,14 @@ class HikingTrailDetailPageWidget extends StatefulWidget {
 
 class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidget> {
   late HikingTrailDetailPageModel _model;
+  late kakaomap.KakaoMapController mapController;
+  Set<kakaomap.Marker> markers = {};
+  Set<kakaomap.Polyline> polylines = {};
+  // String jsonData = '[{"MNTN_NM": "개금산", "PMNTN_NM": "전평제길-순환좌1길구간", "PMNTN_LT": 0.81, "PMNTN_DFFL": "쉬움", "PMNTN_UPPL": 14, "PMNTN_GODN": 10, "PMNTN_RISK": " ", "geometry": [[[22.287873673300204, 119.61653006675876], [22.28812573466625, 119.61638808188773], [22.290462819706413, 119.62052096942354]]]}]';
 
   final String _kakaoMapKey = dotenv.env['kakaoMapKey'].toString();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final GetRoutService _getRoutService = GetRoutService();
-
 
   @override
   void initState() {
@@ -187,18 +193,31 @@ class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidge
                         ),
                         // *** 카카오맵 뷰 들어갈 곳
                         expanded: SizedBox(
-                          child: KakaoMapView(
-                            width: 350,
-                            height: 450,
-                            kakaoMapKey: _kakaoMapKey,
-                            // lat: double.parse(facilityDetailList[0].la  ?? '0.0'),
-                            // lng: double.parse(facilityDetailList[0].lo ?? '0.0'),
-                            lat: 37.5665,
-                            lng: 126.9780,
-                            showMapTypeControl: true,
-                            showZoomControl: true,
-                            markerImageURL: 'https://img.icons8.com/glyph-neue/64/176ffe/region-code.png',
-                          ),
+                          width: 400,
+                          height: 200,
+                          child: kakaomap.KakaoMap(
+                            onMapCreated: ((controller) async {
+                            mapController = controller;
+                            // List<dynamic> coordinates = extractGeometryCoordinates(jsonData);
+                            polylines.add(
+                              kakaomap.Polyline(
+                                polylineId: 'polyline_${polylines.length}',
+                                points: [
+                                  kakaomap.LatLng(35.547759, 129.043057),
+                                  kakaomap.LatLng(35.543129, 129.031538),
+                                  kakaomap.LatLng(35.539493, 129.026430),
+                                  kakaomap.LatLng(35.534132, 129.026117)
+                                ],
+                                strokeColor: Colors.green,
+                                strokeWidth: 3,
+                              ),
+                            );
+
+                          setState(() {});
+                        }),
+                        polylines: polylines.toList(),
+                        center: kakaomap.LatLng(35.546759, 129.043057),
+                      ),
                         ),
                         // expanded: Text(
                         //   '지도 넣으시요...',
