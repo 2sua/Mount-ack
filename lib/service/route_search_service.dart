@@ -5,10 +5,9 @@ import 'dart:developer' as developer;
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class GetRoutService {
-  // final String? _baseUrl = 'http://110.165.19.10:8000/mountrack/routes/?MNTN_NM=개금산';
+class GetSearchRouteService {
 
-  Future<List<route_model.Route>> getRoute() async {
+  Future<List<route_model.Route>> getSearchRoute(String mntnName) async {
     MyLocation myLocation = MyLocation();
 
     try {
@@ -19,7 +18,7 @@ class GetRoutService {
 
     List<route_model.Route> routes = [];
     http.Response response;
-    String apiAddr = 'http://110.165.19.10:8000/mountrack/recommend-routes';
+    String apiAddr = 'http://110.165.19.10:8000/mountrack/routes?MNTN_NM=${mntnName}';
 
     try {
       response = await http.get(Uri.parse(apiAddr));

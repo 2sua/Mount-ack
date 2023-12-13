@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:mount_ack/pages/splash.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:mount_ack/providers/weather_provider.dart';
@@ -26,6 +27,9 @@ Future<void> main() async {
   // await FlutterFlowTheme.initialize();
   NetworkHelper();
 
+//   runApp(MaterialApp(
+//     home: Splash(),
+    
   runApp(ChangeNotifierProvider(
     create: (BuildContext context) => WeatherProvider(),
     child: MyApp()

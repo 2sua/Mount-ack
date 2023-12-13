@@ -12,6 +12,7 @@ import '/flutter_flow/lat_lng.dart';
 import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'serialization_util.dart';
+import 'package:mount_ack/models/route.dart' as route_model;
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -96,7 +97,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
             name: 'hiking_trail_detail_page',
             path: '/hikingTrailDetailPage',
-            builder: (context, params) => HikingTrailDetailPageWidget(),
+            builder: (context, params) => HikingTrailDetailPageWidget(detailData: params.state.extra),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],
@@ -148,6 +149,7 @@ class FFParameters {
       state.allParams.isEmpty ||
       (state.extraMap.length == 1 &&
           state.extraMap.containsKey(kTransitionInfoKey));
+
   bool isAsyncParam(MapEntry<String, dynamic> param) =>
       asyncParams.containsKey(param.key) && param.value is String;
   bool get hasFutures => state.allParams.entries.any(isAsyncParam);

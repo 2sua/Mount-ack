@@ -165,7 +165,7 @@ class _MainWidgetState extends State<MainWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 10.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 10.0),
                 child: Text(
                   '위급 상황 시 행동 요령 (3C)',
                   textAlign: TextAlign.start,
@@ -178,7 +178,7 @@ class _MainWidgetState extends State<MainWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 10.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 20.0),
                 child: Container(
                   width: double.infinity,
                   height: 200.0,
@@ -187,7 +187,7 @@ class _MainWidgetState extends State<MainWidget> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.asset(
-                          'assets/images/3c_1_test_img.jpg',
+                          'assets/images/001.jpeg',
                           width: 300.0,
                           height: 200.0,
                           fit: BoxFit.cover,
@@ -196,7 +196,7 @@ class _MainWidgetState extends State<MainWidget> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.asset(
-                          'assets/images/3c_2_test_img.jpg',
+                          'assets/images/002.jpeg',
                           width: 300.0,
                           height: 200.0,
                           fit: BoxFit.cover,
@@ -205,7 +205,7 @@ class _MainWidgetState extends State<MainWidget> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.asset(
-                          'assets/images/3c_3_test_img.jpg',
+                          'assets/images/003.jpeg',
                           width: 300.0,
                           height: 200.0,
                           fit: BoxFit.cover,

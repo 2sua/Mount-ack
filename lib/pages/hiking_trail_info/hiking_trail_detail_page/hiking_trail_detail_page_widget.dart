@@ -15,9 +15,14 @@ import 'package:mount_ack/service/route_service.dart';
 // import 'package:example/kakaomap_screen.dart';
 import 'package:kakao_map_plugin/kakao_map_plugin.dart' as kakaomap;
 // import 'package:mount_ack/service/parse_route.dart';
+import 'package:mount_ack/models/route.dart' as route_model;
+
+const String kakaoMapKey = '71e91254a407783fddea802ea4946620';
 
 class HikingTrailDetailPageWidget extends StatefulWidget {
-  const HikingTrailDetailPageWidget({Key? key}) : super(key: key);
+  const HikingTrailDetailPageWidget({Key? key, required this.detailData}) : super(key: key);
+
+  final dynamic detailData;
 
   @override
   _HikingTrailDetailPageWidgetState createState() =>
@@ -26,19 +31,24 @@ class HikingTrailDetailPageWidget extends StatefulWidget {
 
 class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidget> {
   late HikingTrailDetailPageModel _model;
+  
   late kakaomap.KakaoMapController mapController;
   Set<kakaomap.Marker> markers = {};
   Set<kakaomap.Polyline> polylines = {};
   // String jsonData = '[{"MNTN_NM": "개금산", "PMNTN_NM": "전평제길-순환좌1길구간", "PMNTN_LT": 0.81, "PMNTN_DFFL": "쉬움", "PMNTN_UPPL": 14, "PMNTN_GODN": 10, "PMNTN_RISK": " ", "geometry": [[[22.287873673300204, 119.61653006675876], [22.28812573466625, 119.61638808188773], [22.290462819706413, 119.62052096942354]]]}]';
 
-  final String _kakaoMapKey = dotenv.env['kakaoMapKey'].toString();
+  late route_model.Route routeDetail;
+  late dynamic detailData;
+
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final GetRoutService _getRoutService = GetRoutService();
+  // final GetRoutService _getRoutService = GetRoutService();
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => HikingTrailDetailPageModel());
+    detailData = widget.detailData;
 
     _model.expandableController1 = ExpandableController(initialExpanded: false);
     _model.expandableController2 = ExpandableController(initialExpanded: false);
@@ -54,6 +64,7 @@ class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidge
 
   @override
   Widget build(BuildContext context) {
+    print(detailData);
     if (isiOS) {
       SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(
@@ -87,43 +98,28 @@ class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidge
               context.pop();
             },
           ),
-          title: FutureBuilder(
-            future: _getRoutService.getRoute(),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData == false)
-                return CircularProgressIndicator();
-              return Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 10),
-                child: Row(
+          title: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 10),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Column(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '개금산',
-                          style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Roboto',
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Text(
-                          '전평제길-순환좌1길구간',
-                          style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Roboto',
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                      ],
+                    Text(
+                      detailData['mntnNm'].toString(),
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Roboto',
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     Text(
-                      '난이도: 쉬움',
+                      detailData['pmntnNm'].toString(),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Roboto',
                         color: Colors.white,
@@ -132,8 +128,16 @@ class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidge
                     ),
                   ],
                 ),
-              );
-            },
+                Text(
+                  '난이도: ${detailData['pmntnDffl'].toString()}',
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: 'Roboto',
+                    color: Colors.white,
+                    fontSize: 13,
+                  ),
+                ),
+              ],
+            ),
           ),
           actions: [],
           centerTitle: false,
@@ -297,7 +301,7 @@ class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidge
                               padding:
                               EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                               child: Text(
-                                'ㆍ등산로 길이:',
+                                'ㆍ등산로 길이: ${detailData['pmntnLt'].toString()}km',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                             ),
@@ -305,7 +309,7 @@ class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidge
                               padding:
                               EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                               child: Text(
-                                'ㆍ상행 시간:',
+                                'ㆍ상행 시간: ${detailData['pmntnUppl'].toString()}분',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                             ),
@@ -313,7 +317,7 @@ class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidge
                               padding:
                               EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
                               child: Text(
-                                'ㆍ하행 시간:',
+                                'ㆍ하행 시간: ${detailData['pmntnGodn'].toString()}분',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                             ),
@@ -392,7 +396,7 @@ class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidge
                               padding:
                               EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
                               child: Text(
-                                'ㆍ뭐가있을까요',
+                                detailData['pmntnRisk'].toString(),
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                             ),

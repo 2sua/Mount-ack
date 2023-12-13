@@ -9,7 +9,7 @@ class Weather {
   String? sunrise;
   String? sunset;
   int? humidity;
-  double? visibility;
+  int? visibility;
   String? country;
   String? city;
 
