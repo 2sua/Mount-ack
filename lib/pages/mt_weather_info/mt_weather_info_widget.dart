@@ -80,59 +80,59 @@ class _MtWeatherInfoWidgetState extends State<MtWeatherInfoWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Align(
-                  alignment: AlignmentDirectional(0.00, 0.00),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
-                    child: Container(
-                      width: 360,
-                      height: 45,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 4,
-                            color: Color(0x33000000),
-                            offset: Offset(0, 2),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 0, 10, 0),
-                        child: TextFormField(
-                          controller: _model.textController,
-                          focusNode: _model.textFieldFocusNode,
-                          autofocus: false,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelStyle:
-                            FlutterFlowTheme.of(context).labelMedium,
-                            hintText: '위치를 검색하세요.',
-                            hintStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                              fontFamily: 'Roboto',
-                              color: Color(0xFF777777),
-                            ),
-                            enabledBorder: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            errorBorder: InputBorder.none,
-                            focusedErrorBorder: InputBorder.none,
-                            suffixIcon: Icon(
-                              Icons.search_rounded,
-                              color: Color(0xFF777777),
-                              size: 26,
-                            ),
-                          ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                          validator: _model.textControllerValidator
-                              .asValidator(context),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                // Align(
+                //   alignment: AlignmentDirectional(0.00, 0.00),
+                //   child: Padding(
+                //     padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                //     child: Container(
+                //       width: 360,
+                //       height: 45,
+                //       decoration: BoxDecoration(
+                //         color: FlutterFlowTheme.of(context).secondaryBackground,
+                //         boxShadow: [
+                //           BoxShadow(
+                //             blurRadius: 4,
+                //             color: Color(0x33000000),
+                //             offset: Offset(0, 2),
+                //           )
+                //         ],
+                //         borderRadius: BorderRadius.circular(20),
+                //       ),
+                //       child: Padding(
+                //         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 10, 0),
+                //         child: TextFormField(
+                //           controller: _model.textController,
+                //           focusNode: _model.textFieldFocusNode,
+                //           autofocus: false,
+                //           obscureText: false,
+                //           decoration: InputDecoration(
+                //             labelStyle:
+                //             FlutterFlowTheme.of(context).labelMedium,
+                //             hintText: '위치를 검색하세요.',
+                //             hintStyle: FlutterFlowTheme.of(context)
+                //                 .labelMedium
+                //                 .override(
+                //               fontFamily: 'Roboto',
+                //               color: Color(0xFF777777),
+                //             ),
+                //             enabledBorder: InputBorder.none,
+                //             focusedBorder: InputBorder.none,
+                //             errorBorder: InputBorder.none,
+                //             focusedErrorBorder: InputBorder.none,
+                //             suffixIcon: Icon(
+                //               Icons.search_rounded,
+                //               color: Color(0xFF777777),
+                //               size: 26,
+                //             ),
+                //           ),
+                //           style: FlutterFlowTheme.of(context).bodyMedium,
+                //           validator: _model.textControllerValidator
+                //               .asValidator(context),
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 FutureBuilder(
                     future: _openWeatherService.getWeather(),
                     builder: (context, AsyncSnapshot snapshot) {

@@ -357,14 +357,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.2"
-  kakao_map_plugin:
-    dependency: "direct main"
-    description:
-      name: kakao_map_plugin
-      sha256: "32a6a7939d4e315619415c00fd317a724cb441345c20705363029c7b15503fd2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.0"
   kakaomap_webview:
     dependency: "direct main"
     description:

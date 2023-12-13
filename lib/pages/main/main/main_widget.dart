@@ -187,7 +187,7 @@ class _MainWidgetState extends State<MainWidget> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.asset(
-                          'assets/images/3c_1_test_img.jpg',
+                          'assets/images/001.jpeg',
                           width: 300.0,
                           height: 200.0,
                           fit: BoxFit.cover,
@@ -196,7 +196,7 @@ class _MainWidgetState extends State<MainWidget> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.asset(
-                          'assets/images/3c_2_test_img.jpg',
+                          'assets/images/002.jpeg',
                           width: 300.0,
                           height: 200.0,
                           fit: BoxFit.cover,
@@ -205,7 +205,7 @@ class _MainWidgetState extends State<MainWidget> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.asset(
-                          'assets/images/3c_3_test_img.jpg',
+                          'assets/images/003.jpeg',
                           width: 300.0,
                           height: 200.0,
                           fit: BoxFit.cover,
