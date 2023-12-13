@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:mount_ack/service/route_service.dart';
-import 'package:mount_ack/models/route.dart';
+import 'package:mount_ack/models/route.dart' as route_model;
 
 import 'hiking_trail_info_model.dart';
 export 'hiking_trail_info_model.dart';
@@ -134,9 +134,9 @@ class _HikingTrailInfoWidgetState extends State<HikingTrailInfoWidget> {
                   ),
                 ),
                 // *** 추천 등산로 바텀 부분은 이 컬럼을 사용
-                FutureBuilder<List<dynamic>>(
+                FutureBuilder<List<route_model.Route>>(
                     future: _getRoutService.getRoute(),
-                    builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+                    builder: (context, AsyncSnapshot<List<route_model.Route>> snapshot) {
                       if (snapshot.hasData == false)
                         return CircularProgressIndicator();
                       return Column(
@@ -176,7 +176,7 @@ class _HikingTrailInfoWidgetState extends State<HikingTrailInfoWidget> {
                                 shrinkWrap: true,
                                 scrollDirection: Axis.vertical,
                                 children: [
-                                  ...(snapshot.data?.map((e) => Padding(
+                                  ...(snapshot.data?.map((route_model.Route e) => Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 8),
                                     child: Container(
                                       width: double.infinity,
@@ -252,8 +252,10 @@ class _HikingTrailInfoWidgetState extends State<HikingTrailInfoWidget> {
                                                     hoverColor: Colors.transparent,
                                                     highlightColor: Colors.transparent,
                                                     onTap: () async {
-                                                      context.pushNamed(
-                                                          'hiking_trail_detail_page');
+                                                      context.pushNamed<Route>(
+                                                        'hiking_trail_detail_page',
+                                                        extra: e.toJson(),
+                                                      );
                                                     },
                                                     child: Icon(
                                                       Icons.chevron_right_rounded,

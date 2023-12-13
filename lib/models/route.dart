@@ -20,4 +20,18 @@ class Route {
     this.pmntnRisk,
     this.geometry,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'mntnNm': mntnNm,
+      'pmntnNm': pmntnNm,
+      'pmntnLt': pmntnLt,
+      'pmntnDffl': pmntnDffl,
+      'pmntnUppl': pmntnUppl,
+      'pmntnGodn': pmntnGodn,
+      'pmntnRisk': pmntnRisk,
+      'geometry': geometry,
+    };
+  }
 }
