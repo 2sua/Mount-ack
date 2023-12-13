@@ -27,12 +27,11 @@ Future<void> main() async {
   // await FlutterFlowTheme.initialize();
   NetworkHelper();
 
-//   runApp(MaterialApp(
-//     home: Splash(),
-    
   runApp(ChangeNotifierProvider(
     create: (BuildContext context) => WeatherProvider(),
-    child: MyApp()
+    child: MaterialApp(
+      home: Splash(),
+    )
   ));
 }
 
