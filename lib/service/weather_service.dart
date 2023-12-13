@@ -38,7 +38,7 @@ class OpenWeatherService {
           sunrise: formatter.format(DateTime.fromMillisecondsSinceEpoch(weatherData["sys"]["sunrise"] * 1000)),
           sunset: formatter.format(DateTime.fromMillisecondsSinceEpoch(weatherData["sys"]["sunset"] * 1000)),
           humidity: weatherData['main']['humidity'],
-          visibility: weatherData['visibility'] / 1000,
+          visibility: weatherData['visibility'] ~/ 1000,
           country: weatherData['sys']['country'],
           city: weatherData['name']
       );

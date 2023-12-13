@@ -131,11 +131,18 @@ class _HikingTrailInfoWidgetState extends State<HikingTrailInfoWidget> {
                             focusedBorder: InputBorder.none,
                             errorBorder: InputBorder.none,
                             focusedErrorBorder: InputBorder.none,
-                            suffixIcon: Icon(
-                              Icons.search_rounded,
-                              color: Color(0xFF777777),
-                              size: 26,
-                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                Icons.search_rounded,
+                                color: Color(0xFF777777),
+                                size: 26,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  searchName = _model.textController.text;
+                                });
+                              },
+                            )
                           ),
                           style: FlutterFlowTheme.of(context).bodyMedium,
                           validator: _model.textControllerValidator
