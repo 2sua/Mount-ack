@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'hiking_trail_detail_page_model.dart';
 export 'hiking_trail_detail_page_model.dart';
+import 'package:kakaomap_webview/kakaomap_webview.dart';
+import 'package:mount_ack/service/route_service.dart';
 
 class HikingTrailDetailPageWidget extends StatefulWidget {
   const HikingTrailDetailPageWidget({Key? key}) : super(key: key);
@@ -19,11 +21,13 @@ class HikingTrailDetailPageWidget extends StatefulWidget {
       _HikingTrailDetailPageWidgetState();
 }
 
-class _HikingTrailDetailPageWidgetState
-    extends State<HikingTrailDetailPageWidget> {
+class _HikingTrailDetailPageWidgetState extends State<HikingTrailDetailPageWidget> {
   late HikingTrailDetailPageModel _model;
 
+  final String _kakaoMapKey = dotenv.env['kakaoMapKey'].toString();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final GetRoutService _getRoutService = GetRoutService();
+
 
   @override
   void initState() {
@@ -77,28 +81,43 @@ class _HikingTrailDetailPageWidgetState
               context.pop();
             },
           ),
-          title: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 10),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Column(
+          title: FutureBuilder(
+            future: _getRoutService.getRoute(),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData == false)
+                return CircularProgressIndicator();
+              return Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 10),
+                child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(
-                      '개금산',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Roboto',
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '개금산',
+                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Roboto',
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          '전평제길-순환좌1길구간',
+                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Roboto',
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ],
                     ),
                     Text(
-                      '전평제길-순환좌1길구간',
+                      '난이도: 쉬움',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Roboto',
                         color: Colors.white,
@@ -107,16 +126,8 @@ class _HikingTrailDetailPageWidgetState
                     ),
                   ],
                 ),
-                Text(
-                  '난이도: 쉬움',
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    fontFamily: 'Roboto',
-                    color: Colors.white,
-                    fontSize: 13,
-                  ),
-                ),
-              ],
-            ),
+              );
+            },
           ),
           actions: [],
           centerTitle: false,
@@ -175,10 +186,24 @@ class _HikingTrailDetailPageWidgetState
                           ),
                         ),
                         // *** 카카오맵 뷰 들어갈 곳
-                        expanded: Text(
-                          '지도 넣으시요...',
-                          style: FlutterFlowTheme.of(context).bodyMedium,
+                        expanded: SizedBox(
+                          child: KakaoMapView(
+                            width: 350,
+                            height: 450,
+                            kakaoMapKey: _kakaoMapKey,
+                            // lat: double.parse(facilityDetailList[0].la  ?? '0.0'),
+                            // lng: double.parse(facilityDetailList[0].lo ?? '0.0'),
+                            lat: 37.5665,
+                            lng: 126.9780,
+                            showMapTypeControl: true,
+                            showZoomControl: true,
+                            markerImageURL: 'https://img.icons8.com/glyph-neue/64/176ffe/region-code.png',
+                          ),
                         ),
+                        // expanded: Text(
+                        //   '지도 넣으시요...',
+                        //   style: FlutterFlowTheme.of(context).bodyMedium,
+                        // ),
                         theme: ExpandableThemeData(
                           tapHeaderToExpand: true,
                           tapBodyToExpand: false,
